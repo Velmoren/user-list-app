@@ -26,24 +26,25 @@
           <label for="login-password">Password</label>
           <input
             type="password"
+            autocomplete="true"
             class="form-control"
             id="login-password"
             formControlName="password"
           >
-        </div>
 
-        <div
-          *ngIf="password?.invalid && (password?.touched || password?.dirty)"
-          class="validation"
-        >
-          <small *ngIf="password?.errors?.['required']" class="form-error-text">
-            Поле password не может быть пустым
-          </small>
+          <div
+            *ngIf="password?.invalid && (password?.touched || password?.dirty)"
+            class="validation"
+          >
+            <small *ngIf="password?.errors?.['required']" class="form-error-text">
+              Поле password не может быть пустым
+            </small>
 
-          <small *ngIf="password?.errors?.['minlength']" class="form-error-text">
-            Password must be at least {{password?.errors?.['minlength']['requiredLength']}} characters.
-            Now he {{password?.errors?.['minlength']['actualLength']}}
-          </small>
+            <small *ngIf="password?.errors?.['minlength']" class="form-error-text">
+              Password must be at least {{password?.errors?.['minlength']['requiredLength']}} characters.
+              Now he {{password?.errors?.['minlength']['actualLength']}}
+            </small>
+          </div>
         </div>
 
         <button

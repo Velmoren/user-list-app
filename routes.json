@@ -1,0 +1,4 @@
+{
+  "/api/users": "/users",
+  "/api/users/_search?email=:searchstring": "/users/?email=:searchstring"
+}

@@ -1,32 +1,26 @@
-<div class="container">
-  <div class="row pt-5">
-    <div class="col">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">User</th>
-            <th scope="col">Email</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let user of users; index as idx">
-            <th scope="row">{{ idx + 1 }}</th>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-info btn-sm"
-                [routerLink]="['/users', user.id]"
-              >Info</a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; index as idx">
+      <th scope="row">{{ idx + 1 }}</th>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <a
+          type="button"
+          class="btn btn-info btn-sm"
+          [routerLink]="['/users', user.id]"
+        >Info</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

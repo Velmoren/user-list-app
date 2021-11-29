@@ -20,6 +20,14 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "deploy-ghpages": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://github.com/Velmoren/user-list-app.git/",
+            "name": "user-list-app/dist",
+            "email": "velmoren@yahoo.com"
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
