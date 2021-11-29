@@ -20,6 +20,13 @@
       "password": "123456",
       "permission": "user",
       "id": 2
+    },
+    {
+      "name": "asdasda",
+      "email": "asdasdasd@asdasd",
+      "password": "123123123",
+      "permission": "admin",
+      "id": 3
     }
   ]
 }

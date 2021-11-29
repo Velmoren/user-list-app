@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UsersService} from "../services/users.service";
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-users-page',
@@ -10,12 +11,18 @@ export class UsersPageComponent implements OnInit {
 
   users: any = []
 
-  constructor(public userService: UsersService) { }
+  constructor(
+    public userService: UsersService,
+    private loading: LoadingService,
+    private cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+    Promise.resolve().then(() => this.loading.enableLoading())
+
     this.userService.getUsers().subscribe(res => {
       this.users = res
+      Promise.resolve().then(() => this.loading.disableLoading())
     })
   }
-
 }

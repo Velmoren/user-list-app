@@ -1,4 +1,5 @@
 {
   "/api/users": "/users",
-  "/api/users/_search?email=:searchstring": "/users/?email=:searchstring"
+  "/api/users/_search?email=:searchstring": "/users/?email=:searchstring",
+  "/api/users/_search?id=:searchstring": "/users/?id=:searchstring"
 }

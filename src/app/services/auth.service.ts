@@ -1,6 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {delay} from "rxjs";
+
+export interface User {
+  id?: number
+  name: string
+  email: string
+  password: string
+  permission: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +17,7 @@ import {Router} from "@angular/router";
 export class AuthService{
 
   private isAuth: boolean = false
-  private user = {}
+  private user?: User
 
   constructor(
     private http: HttpClient
@@ -29,6 +38,7 @@ export class AuthService{
 
   saveSession(user: any) {
     this.isAuth = true
+    this.user = user
     localStorage.setItem('user', JSON.stringify(user))
   }
 
@@ -39,5 +49,9 @@ export class AuthService{
     } else {
       this.isAuth = false
     }
+  }
+
+  isAdmin() {
+    return this.user?.permission === 'admin'
   }
 }

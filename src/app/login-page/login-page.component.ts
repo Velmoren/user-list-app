@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +16,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private loading: LoadingService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class LoginPageComponent implements OnInit {
       return
     }
 
+    this.loading.enableLoading()
     this.submitted = true
 
     const user = {
@@ -61,10 +64,14 @@ export class LoginPageComponent implements OnInit {
       if (res.length) {
         this.loginForm.reset()
         this.router.navigate(['/users'])
-        this.auth.saveSession(res)
+        this.auth.saveSession(res[0])
+
       }
+
+      this.loading.disableLoading()
     }, (error: string) => {
       this.submitted = false
+      this.loading.disableLoading()
     })
   }
 

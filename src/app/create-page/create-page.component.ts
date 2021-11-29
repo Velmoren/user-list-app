@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../services/users.service";
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators, ValidationErrors} from "@angular/forms";
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-create-page',
@@ -8,14 +9,12 @@ import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators, Valida
   styleUrls: ['./create-page.component.scss']
 })
 
-
-
 export class CreatePageComponent implements OnInit {
 
   createUserForm!: FormGroup
   submitted: boolean = false
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private loading: LoadingService) { }
 
   ngOnInit(): void {
     // @ts-ignore
@@ -41,6 +40,15 @@ export class CreatePageComponent implements OnInit {
     })
   }
 
+  get name() {
+    return this.createUserForm.get('name');
+  }
+  get email() {
+    return this.createUserForm.get('email');
+  }
+  get permission() {
+    return this.createUserForm.get('permission');
+  }
   get password() {
     return this.createUserForm.get('password');
   }
@@ -54,6 +62,7 @@ export class CreatePageComponent implements OnInit {
       return
     }
 
+    this.loading.enableLoading()
     this.submitted = true
 
     const user = {
@@ -66,6 +75,7 @@ export class CreatePageComponent implements OnInit {
     this.usersService.setNewUser(user).subscribe(res => {
       this.createUserForm.reset()
       this.submitted = false
+      this.loading.disableLoading()
     })
   }
 }

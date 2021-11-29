@@ -13,6 +13,11 @@
               formControlName="name"
             >
           </div>
+          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">
+            <small class="form-error-text" *ngIf="name?.errors?.['required']">
+              Поле имя не может быть пустым
+            </small>
+          </div>
         </div>
       </div>
 
@@ -26,6 +31,15 @@
               type="email"
               formControlName="email"
             >
+          </div>
+          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+            <small class="form-error-text" *ngIf="email?.errors?.['required']">
+              Поле email не может быть пустым
+            </small>
+
+            <small class="form-error-text" *ngIf="email?.errors?.['email']">
+              Введите корректный email
+            </small>
           </div>
         </div>
       </div>
@@ -60,12 +74,17 @@
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="inputState">State</label>
+          <label for="inputState">Роль</label>
           <select id="inputState" class="form-control" formControlName="permission">
             <option selected value="">Выбрать роль</option>
-            <option>admin</option>
-            <option>user</option>
+            <option value="admin">admin</option>
+            <option value="user">user</option>
           </select>
+          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">
+            <small class="form-error-text" *ngIf="permission?.errors?.['required']">
+              Поле Роль - обязательное
+            </small>
+          </div>
         </div>
       </div>
 
@@ -74,7 +93,8 @@
           type="submit"
           class="btn btn-dark btn-custom-block"
           [disabled]="createUserForm.invalid || submitted"
-        >Отправить</button>
+        >Отправить
+        </button>
       </div>
     </div>
   </form>

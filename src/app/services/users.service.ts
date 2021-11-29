@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {delay} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class UsersService {
   }
 
   setNewUser(user: any) {
-    console.log(user)
     return this.http.post(`http://localhost:4201/api/users`, user)
   }
 }
