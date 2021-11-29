@@ -1,16 +1,25 @@
 {
   "users": [
     {
+      "id": 0,
       "name": "Администратор",
       "email": "admin@test.com",
       "password": "12345678",
       "permission": "admin"
     },
     {
+      "id": 1,
       "name": "Пользователь",
       "email": "user@test.com",
       "password": "12345678",
       "permission": "user"
+    },
+    {
+      "name": "asdasd",
+      "email": "asdasd@asdasdasd",
+      "password": "123456",
+      "permission": "user",
+      "id": 2
     }
   ]
 }

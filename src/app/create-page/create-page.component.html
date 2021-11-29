@@ -1,1 +1,81 @@
-<p>create-page works!</p>
+<div class="container pt-3">
+  <form action="" class="w-100" [formGroup]="createUserForm" (ngSubmit)="submit()">
+    <div class="row">
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-name">Имя</label>
+          <div class="input-group">
+            <input
+              id="input-name"
+              class="form-control"
+              type="text"
+              formControlName="name"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-email">Email</label>
+          <div class="input-group">
+            <input
+              id="input-email"
+              class="form-control"
+              type="email"
+              formControlName="email"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-password">Пароль</label>
+          <div class="input-group">
+            <input
+              id="input-password"
+              class="form-control"
+              type="text"
+              formControlName="password"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-confirm-password">Повторите пароль</label>
+          <div class="input-group">
+            <input
+              id="input-confirm-password"
+              class="form-control"
+              type="text"
+              formControlName="confirmPassword"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="inputState">State</label>
+          <select id="inputState" class="form-control" formControlName="permission">
+            <option selected value="">Выбрать роль</option>
+            <option>admin</option>
+            <option>user</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col col-12">
+        <button
+          type="submit"
+          class="btn btn-dark btn-custom-block"
+          [disabled]="createUserForm.invalid || submitted"
+        >Отправить</button>
+      </div>
+    </div>
+  </form>
+</div>

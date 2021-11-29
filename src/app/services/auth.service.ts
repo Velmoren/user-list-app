@@ -11,8 +11,7 @@ export class AuthService{
   private user = {}
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ) { }
 
   login(user: any) {
@@ -37,9 +36,8 @@ export class AuthService{
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(<string>localStorage.getItem('user'))
       this.isAuth = true
-      this.router.navigate(['/users'])
     } else {
-
+      this.isAuth = false
     }
   }
 }

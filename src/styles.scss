@@ -11,3 +11,10 @@
     color: red;
   }
 }
+
+.btn-custom-block {
+  @media (max-width: 768px) {
+    width: 100%;
+    display: block;
+  }
+}

@@ -19,6 +19,10 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.auth.isAuthenticated()) {
+      this.router.navigate(['/users'])
+    }
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [
         Validators.email,
@@ -60,7 +64,6 @@ export class LoginPageComponent implements OnInit {
         this.auth.saveSession(res)
       }
     }, (error: string) => {
-      console.log(error)
       this.submitted = false
     })
   }
