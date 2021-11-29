@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../services/users.service";
 import {LoadingService} from "../services/loading.service";
 
@@ -13,8 +13,7 @@ export class UsersPageComponent implements OnInit {
 
   constructor(
     public userService: UsersService,
-    private loading: LoadingService,
-    private cd: ChangeDetectorRef
+    private loading: LoadingService
   ) { }
 
   ngOnInit(): void {
