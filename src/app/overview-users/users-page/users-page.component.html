@@ -23,6 +23,7 @@
             [routerLink]="['/users', 'details', user.id]"
           >Info</a>
           <a
+            *ngIf="auth.isAdmin()"
             type="button"
             class="btn btn-info btn-sm"
             [routerLink]="['/user', 'edit', user.id]"

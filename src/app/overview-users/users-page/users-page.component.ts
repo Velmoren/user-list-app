@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {LoadingService} from "../../services/loading.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-users-page',
@@ -12,6 +13,7 @@ export class UsersPageComponent implements OnInit {
   users: any = []
 
   constructor(
+    public auth: AuthService,
     public userService: UsersService,
     private loading: LoadingService
   ) { }

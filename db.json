@@ -27,6 +27,27 @@
       "password": "123123123",
       "permission": "admin",
       "id": 3
+    },
+    {
+      "name": "asdasd",
+      "email": "asdasd@asdasdasd",
+      "password": "123456",
+      "permission": "admin",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "email": "asdasd@asdasdasd",
+      "password": "123456",
+      "permission": "admin",
+      "id": 5
+    },
+    {
+      "name": "Мишаня",
+      "email": "misha@misha.com",
+      "password": "123456",
+      "permission": "user",
+      "id": 6
     }
   ]
 }

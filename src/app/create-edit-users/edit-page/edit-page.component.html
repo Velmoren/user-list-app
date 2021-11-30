@@ -1,1 +1,102 @@
-<p>edit-page works!</p>
+<div class="container pt-3">
+  <h4 class="mb-5 text-center text-sm-left">Редактирование пользователя</h4>
+
+  <form action="" class="w-100" [formGroup]="editUserForm" (ngSubmit)="submit()">
+    <div class="row">
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-name">Имя</label>
+          <div class="input-group">
+            <input
+              id="input-name"
+              class="form-control"
+              type="text"
+              formControlName="name"
+            >
+          </div>
+<!--          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">-->
+<!--            <small class="form-error-text" *ngIf="name?.errors?.['required']">-->
+<!--              Поле имя не может быть пустым-->
+<!--            </small>-->
+<!--          </div>-->
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-email">Email</label>
+          <div class="input-group">
+            <input
+              id="input-email"
+              class="form-control"
+              type="email"
+              formControlName="email"
+            >
+          </div>
+<!--          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">-->
+<!--            <small class="form-error-text" *ngIf="email?.errors?.['required']">-->
+<!--              Поле email не может быть пустым-->
+<!--            </small>-->
+
+<!--            <small class="form-error-text" *ngIf="email?.errors?.['email']">-->
+<!--              Введите корректный email-->
+<!--            </small>-->
+<!--          </div>-->
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-password">Пароль</label>
+          <div class="input-group">
+            <input
+              id="input-password"
+              class="form-control"
+              type="text"
+              formControlName="password"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="input-confirm-password">Повторите пароль</label>
+          <div class="input-group">
+            <input
+              id="input-confirm-password"
+              class="form-control"
+              type="text"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 col-md-6">
+        <div class="form-group">
+          <label for="inputState">Роль</label>
+          <select id="inputState" class="form-control" formControlName="permission">
+            <option selected value="">Выбрать роль</option>
+            <option value="admin">admin</option>
+            <option value="user">user</option>
+          </select>
+<!--          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">-->
+<!--            <small class="form-error-text" *ngIf="permission?.errors?.['required']">-->
+<!--              Поле Роль - обязательное-->
+<!--            </small>-->
+<!--          </div>-->
+        </div>
+      </div>
+
+      <div class="col col-12">
+        <button
+          type="submit"
+          class="btn btn-dark btn-custom-block"
+          [disabled]="editUserForm.invalid || submitted"
+        >Отправить
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

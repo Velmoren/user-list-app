@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators, ValidationErrors} from "@angular/forms";
 import {LoadingService} from "../../services/loading.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-page',
@@ -13,27 +14,36 @@ export class CreatePageComponent implements OnInit {
 
   createUserForm!: FormGroup
   submitted: boolean = false
+  user = {
+    name: '',
+    email: '',
+    permission: '',
+    password: '',
+    confirmPassword: '',
+  }
 
-  constructor(private usersService: UsersService, private loading: LoadingService) { }
+  constructor(
+    private usersService: UsersService,
+    private loading: LoadingService,
+  ) {}
 
   ngOnInit(): void {
-    // @ts-ignore
     this.createUserForm = new FormGroup({
-      name: new FormControl('', [
+      name: new FormControl(this.user.name, [
         Validators.required
       ]),
-      email: new FormControl('', [
+      email: new FormControl(this.user.email, [
         Validators.email,
         Validators.required
       ]),
-      permission: new FormControl('', [
+      permission: new FormControl(this.user.permission, [
         Validators.required
       ]),
-      password: new FormControl('', [
+      password: new FormControl(this.user.password, [
         Validators.required,
         Validators.minLength(6)
       ]),
-      confirmPassword: new FormControl('', [
+      confirmPassword: new FormControl(this.user.confirmPassword, [
         Validators.required,
         Validators.minLength(6),
       ])
@@ -61,7 +71,7 @@ export class CreatePageComponent implements OnInit {
     if (this.createUserForm.invalid) {
       return
     }
-
+    console.log(this.user)
     this.loading.enableLoading()
     this.submitted = true
 
