@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../services/users.service";
-import {LoadingService} from "../services/loading.service";
+import {UsersService} from "../../services/users.service";
+import {LoadingService} from "../../services/loading.service";
 
 @Component({
   selector: 'app-users-page',

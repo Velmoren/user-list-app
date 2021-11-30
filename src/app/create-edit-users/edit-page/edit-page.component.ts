@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../services/users.service";
-import {LoadingService} from "../services/loading.service";
+import {UsersService} from "../../services/users.service";
+import {LoadingService} from "../../services/loading.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs";
-import {User} from "../services/auth.service";
+import {User} from "../../services/auth.service";
 
 @Component({
   selector: 'app-edit-page',

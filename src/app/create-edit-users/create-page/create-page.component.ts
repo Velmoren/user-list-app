@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "../services/users.service";
+import {UsersService} from "../../services/users.service";
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators, ValidationErrors} from "@angular/forms";
-import {LoadingService} from "../services/loading.service";
+import {LoadingService} from "../../services/loading.service";
 
 @Component({
   selector: 'app-create-page',
