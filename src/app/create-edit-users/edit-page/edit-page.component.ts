@@ -4,7 +4,7 @@ import {LoadingService} from "../../services/loading.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {first, switchMap} from "rxjs";
-import { MustMatch } from '../../helpers/must-match.validator';
+import {MustMatch} from '../../helpers/must-match.validator';
 
 @Component({
   selector: 'app-edit-page',
@@ -47,6 +47,11 @@ export class EditPageComponent implements OnInit {
       .subscribe(user => {
         this.editUserForm.patchValue(user)
       })
+  }
+
+  passwordMatchValidator(frm: FormGroup) {
+    return frm.controls['password'].value ===
+    frm.controls['confirmPassword'].value ? null : {'mismatch': true};
   }
 
   get name() {
