@@ -24,7 +24,7 @@ export class AuthService{
   ) { }
 
   login(user: any) {
-    return this.http.get(`http://localhost:4201/api/users/_search?email=${user.email}&password=${user.password}`)
+    return this.http.get(`http://localhost:4201/users?email=${user.email}&password=${user.password}`)
   }
 
   logout() {

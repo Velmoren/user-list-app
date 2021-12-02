@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,13 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

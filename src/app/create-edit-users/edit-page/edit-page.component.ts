@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../../services/users.service";
+import {User, UsersService} from "../../services/users.service";
 import {LoadingService} from "../../services/loading.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {first, switchMap} from "rxjs";
-import {MustMatch} from '../../helpers/must-match.validator';
+import {checkPasswords} from "../../helpers/checkPasswords.validator";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-page',
@@ -16,8 +17,12 @@ export class EditPageComponent implements OnInit {
 
   editUserForm!: FormGroup
   userId: string = ''
+  userAvatarFile: any
+  imagePath: any
+  editUserId?: number
 
   user: any = {
+    id: '',
     name: '',
     email: '',
     permission: '',
@@ -27,7 +32,9 @@ export class EditPageComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private loading: LoadingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private router: Router,
   ) {
   }
 
@@ -38,14 +45,18 @@ export class EditPageComponent implements OnInit {
       name: new FormControl(this.user.name, Validators.required),
       email: new FormControl(this.user.email, [Validators.required, Validators.email]),
       permission: new FormControl(this.user.permission, Validators.required),
+      avatar: new FormControl(this.user.avatar),
       password: new FormControl(this.user.password, [Validators.required, Validators.minLength(6)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+      confirmPassword: new FormControl('')
+    }, { validators: checkPasswords })
 
     this.usersService.getUserById(+this.userId)
       .pipe(first())
-      .subscribe(user => {
+      .subscribe((user: any) => {
         this.editUserForm.patchValue(user)
+        this.userAvatarFile = user.avatar.name
+        this.imagePath = user.avatar.link
+        this.editUserId = user.id
       })
   }
 
@@ -74,20 +85,53 @@ export class EditPageComponent implements OnInit {
     return this.editUserForm.get('confirmPassword');
   }
 
+  get avatarStr() {
+    return this.editUserForm.get('avatar')
+  }
 
   submit() {
     if (this.editUserForm.invalid) {
       return
     }
-    console.log(this.editUserForm.value)
+
+    const user: User = this.editUserForm.value
+
     this.loading.enableLoading()
     this.submitted = true
 
-    this.usersService.updateUser(this.editUserForm.value).subscribe(res => {
+    this.usersService.updateUser(user, this.editUserId).subscribe(res => {
       this.submitted = false
       this.loading.disableLoading()
+
+      this.toastr.success('User updated!', 'Success!');
+      this.router.navigate(['/users'])
     })
   }
 
+  onSelectAvatar(event: any) {
+    if(event?.target?.files.length > 0) {
+      const reader = new FileReader()
+      const file = event?.target?.files[0]
+      const type = event?.target?.files[0].type
 
+      this.userAvatarFile = file.name
+      this.imagePath = file
+
+      if (type.match(/image\/*/) == null) {
+        return alert('Не картинка')
+      }
+
+      reader.readAsDataURL(file)
+      reader.onload = (_event) => {
+        this.imagePath = reader.result
+
+        this.editUserForm.patchValue({
+          avatar: {
+            link: this.imagePath,
+            name: this.userAvatarFile
+          }
+        })
+      }
+    }
+  }
 }

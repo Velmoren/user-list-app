@@ -60,7 +60,7 @@ export class LoginPageComponent implements OnInit {
 
     this.auth.login(user).subscribe((res: any) => {
       this.submitted = false
-
+      console.log(res)
       if (res.length) {
         this.loginForm.reset()
         this.router.navigate(['/users'])
@@ -70,6 +70,7 @@ export class LoginPageComponent implements OnInit {
 
       this.loading.disableLoading()
     }, (error: string) => {
+      console.log(error)
       this.submitted = false
       this.loading.disableLoading()
     })
