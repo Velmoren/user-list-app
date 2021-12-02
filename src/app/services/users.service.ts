@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {FormControl} from "@angular/forms";
 
 export interface Avatar {
   link: string,
   name: string
+}
+
+export interface Skill {
+  name: string,
+  startAge: Date,
+  endAge: Date
 }
 
 export interface User {
@@ -12,7 +19,8 @@ export interface User {
   permission: string
   password: string,
   isOnline: boolean,
-  avatar: Avatar
+  avatar: Avatar,
+  skills: Skill[]
 }
 
 @Injectable({

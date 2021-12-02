@@ -1,4 +1,16 @@
 .users {
+  &-table {
+    th {
+      font-size: .8rem;
+      &.online {
+        color: green;
+      }
+
+      &.offline {
+        color: red;
+      }
+    }
+  }
   &-avatar {
     width: 40px;
     height: 40px;

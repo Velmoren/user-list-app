@@ -13,7 +13,7 @@ import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +23,9 @@ import {ToastrModule} from "ngx-toastr";
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
+      timeOut: 3000,
       positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
+      progressBar: true
     })
   ],
   providers: [],

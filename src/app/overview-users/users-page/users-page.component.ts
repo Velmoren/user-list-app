@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 export class UsersPageComponent implements OnInit {
 
   users: any = []
+  isOnline = true
 
   constructor(
     public auth: AuthService,

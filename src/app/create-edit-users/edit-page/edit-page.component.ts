@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {User, UsersService} from "../../services/users.service";
+import {Skill, User, UsersService} from "../../services/users.service";
 import {LoadingService} from "../../services/loading.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {first, switchMap} from "rxjs";
 import {checkPasswords} from "../../helpers/checkPasswords.validator";
 import {ToastrService} from "ngx-toastr";
+import {checkDates} from "../../helpers/checkDates.validator";
 
 @Component({
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
-  styleUrls: ['./edit-page.component.scss']
+  styleUrls: ['../create-edit-users.scss']
 })
 export class EditPageComponent implements OnInit {
   submitted: boolean = false
@@ -35,6 +36,7 @@ export class EditPageComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
+    private fb: FormBuilder
   ) {
   }
 
@@ -46,6 +48,7 @@ export class EditPageComponent implements OnInit {
       email: new FormControl(this.user.email, [Validators.required, Validators.email]),
       permission: new FormControl(this.user.permission, Validators.required),
       avatar: new FormControl(this.user.avatar),
+      skills: new FormArray([]),
       password: new FormControl(this.user.password, [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('')
     }, { validators: checkPasswords })
@@ -57,6 +60,18 @@ export class EditPageComponent implements OnInit {
         this.userAvatarFile = user.avatar.name
         this.imagePath = user.avatar.link
         this.editUserId = user.id
+
+        this.skillsControls.removeAt(0)
+
+        user.skills.forEach((skill: Skill) => {
+          const control = new FormGroup({
+            name: new FormControl(skill.name),
+            startAge: new FormControl(skill.startAge),
+            endAge: new FormControl(skill.endAge)
+          })
+
+          this.skillsControls.push(control)
+        })
       })
   }
 
@@ -89,12 +104,31 @@ export class EditPageComponent implements OnInit {
     return this.editUserForm.get('avatar')
   }
 
+  get skills() {
+    return this.editUserForm.get('skills');
+  }
+
+  get skillsControls() { return <FormArray>this.editUserForm.get('skills'); }
+
   submit() {
     if (this.editUserForm.invalid) {
       return
     }
 
-    const user: User = this.editUserForm.value
+    const user: User = {
+      name: this.editUserForm.value.name,
+      email: this.editUserForm.value.email,
+      password: this.editUserForm.value.password,
+      permission: this.editUserForm.value.permission,
+      isOnline: false,
+      avatar: {
+        link: this.imagePath,
+        name: this.userAvatarFile
+      },
+      skills: [
+        ...this.editUserForm.value.skills
+      ]
+    }
 
     this.loading.enableLoading()
     this.submitted = true
@@ -132,6 +166,26 @@ export class EditPageComponent implements OnInit {
           }
         })
       }
+    }
+  }
+
+  removeSkillsGroup(id: number) {
+    this.skillsControls.removeAt(id)
+  }
+
+  addSkillGroup() {
+    if (this.skillsControls.controls.length < 3) {
+      const control = new FormGroup({
+        name: new FormControl(''),
+        startAge: new FormControl(''),
+        endAge: new FormControl('')
+      },{
+        validators: checkDates
+      })
+
+      this.skillsControls.push(control)
+    } else {
+      alert('Добавлено максимум полей')
     }
   }
 }

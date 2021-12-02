@@ -1,0 +1,18 @@
+.skills {
+  &-block {
+    position: relative;
+  }
+  &-remove {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: red;
+    cursor: pointer;
+    z-index: 10;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+}

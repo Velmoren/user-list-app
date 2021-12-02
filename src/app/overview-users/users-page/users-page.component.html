@@ -1,8 +1,9 @@
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-striped users-table">
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Status</th>
       <th scope="col">Avatar</th>
       <th scope="col">User</th>
       <th scope="col">Email</th>
@@ -13,6 +14,7 @@
     <tbody>
     <tr *ngFor="let user of users; index as idx">
       <th scope="row">{{ idx + 1 }}</th>
+      <th scope="row" [appIsOnline]="user['isOnline']">{{ user['isOnline'] ? 'Online' : 'Offline' }}</th>
       <th>
         <img class="users-avatar" [src]="user.avatar.link" alt="user.avatar.name">
       </th>

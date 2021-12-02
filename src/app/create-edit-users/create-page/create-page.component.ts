@@ -5,11 +5,12 @@ import {LoadingService} from "../../services/loading.service";
 import {checkPasswords} from "../../helpers/checkPasswords.validator";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {checkDates} from "../../helpers/checkDates.validator";
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.scss']
+  styleUrls: ['../create-edit-users.scss']
 })
 
 export class CreatePageComponent implements OnInit {
@@ -41,21 +42,13 @@ export class CreatePageComponent implements OnInit {
         Validators.required
       ]),
       avatar: new FormControl(''),
-      skills: new FormArray([
-        this.fb.group({
-          name: new FormControl(''),
-          startAge: new FormControl(''),
-          endAge: new FormControl(''),
-        })
-      ]),
+      skills: new FormArray([]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6)
       ]),
       confirmPassword: new FormControl([''])
     }, {validators: checkPasswords})
-
-    console.log(this.skillsControls.controls)
   }
 
   get name() {
@@ -86,7 +79,9 @@ export class CreatePageComponent implements OnInit {
     return this.createUserForm.get('skills');
   }
 
-  get skillsControls() { return <FormArray>this.createUserForm.get('skills'); }
+  get skillsControls() {
+    return <FormArray>this.createUserForm.get('skills');
+  }
 
   submit() {
     if (this.createUserForm.invalid) {
@@ -105,7 +100,10 @@ export class CreatePageComponent implements OnInit {
       avatar: {
         link: this.imagePath,
         name: this.userAvatarFile
-      }
+      },
+      skills: [
+        ...this.createUserForm.value.skills
+      ]
     }
 
     this.usersService.setNewUser(user).subscribe(res => {
@@ -147,17 +145,23 @@ export class CreatePageComponent implements OnInit {
     }
   }
 
-  removeSkillGroup() {
-  alert('asdasd')
+  removeSkillsGroup(id: number) {
+    this.skillsControls.removeAt(id)
   }
 
   addSkillGroup() {
-    const control = new FormGroup({
-      name: new FormControl(''),
-      startAge: new FormControl(''),
-      endAge: new FormControl('')
-    })
+    if (this.skillsControls.controls.length < 3) {
+      const control = new FormGroup({
+        name: new FormControl(''),
+        startAge: new FormControl(''),
+        endAge: new FormControl('')
+      },{
+        validators: checkDates
+      })
 
-    this.skillsControls.push(control)
+      this.skillsControls.push(control)
+    } else {
+      alert('Добавлено максимум полей')
+    }
   }
 }

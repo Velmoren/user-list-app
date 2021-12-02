@@ -3,7 +3,6 @@
 
   <form action="" class="w-100" [formGroup]="editUserForm" (ngSubmit)="submit()">
     <div class="row">
-
       <div class="col col-12 col-md-6">
         <div class="form-group">
           <label for="input-name">Имя</label>
@@ -15,11 +14,11 @@
               formControlName="name"
             >
           </div>
-<!--          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">-->
-<!--            <small class="form-error-text" *ngIf="name?.errors?.['required']">-->
-<!--              Поле имя не может быть пустым-->
-<!--            </small>-->
-<!--          </div>-->
+          <!--          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">-->
+          <!--            <small class="form-error-text" *ngIf="name?.errors?.['required']">-->
+          <!--              Поле имя не может быть пустым-->
+          <!--            </small>-->
+          <!--          </div>-->
         </div>
       </div>
 
@@ -34,18 +33,20 @@
               formControlName="email"
             >
           </div>
-<!--          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">-->
-<!--            <small class="form-error-text" *ngIf="email?.errors?.['required']">-->
-<!--              Поле email не может быть пустым-->
-<!--            </small>-->
+          <!--          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">-->
+          <!--            <small class="form-error-text" *ngIf="email?.errors?.['required']">-->
+          <!--              Поле email не может быть пустым-->
+          <!--            </small>-->
 
-<!--            <small class="form-error-text" *ngIf="email?.errors?.['email']">-->
-<!--              Введите корректный email-->
-<!--            </small>-->
-<!--          </div>-->
+          <!--            <small class="form-error-text" *ngIf="email?.errors?.['email']">-->
+          <!--              Введите корректный email-->
+          <!--            </small>-->
+          <!--          </div>-->
         </div>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
           <label for="input-password">Пароль</label>
@@ -73,7 +74,9 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
           <label for="inputState">Роль</label>
@@ -82,11 +85,11 @@
             <option value="admin">admin</option>
             <option value="user">user</option>
           </select>
-<!--          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">-->
-<!--            <small class="form-error-text" *ngIf="permission?.errors?.['required']">-->
-<!--              Поле Роль - обязательное-->
-<!--            </small>-->
-<!--          </div>-->
+          <!--          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">-->
+          <!--            <small class="form-error-text" *ngIf="permission?.errors?.['required']">-->
+          <!--              Поле Роль - обязательное-->
+          <!--            </small>-->
+          <!--          </div>-->
         </div>
       </div>
 
@@ -104,13 +107,56 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col col-12">
+    <div class="row" formArrayName="skills">
+      <div class="col col-12 col-md-6">
+        <div class="row skills-block mb-3" *ngFor="let control of skillsControls.controls; let i = index" [formGroupName]="i">
+          <div class="skills-remove" (click)="removeSkillsGroup(i)"><i class="bi bi-x-circle-fill"></i></div>
+          <div class="col col-12">
+            <div class="form-group">
+              <label for="input-email">Место учебы</label>
+              <div class="input-group">
+                <input id="input-skill" class="form-control" type="text" formControlName="name">
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-sm-6">
+            <div class="form-group">
+              <label for="input-email">Дата начала</label>
+              <div class="input-group">
+                <input id="input-startAge" class="form-control" type="date" formControlName="startAge">
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-sm-6">
+            <div class="form-group">
+              <label for="input-email">Дата завершения</label>
+              <div class="input-group">
+                <input id="input-endAge" class="form-control" type="date" formControlName="endAge">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button
+              class="btn btn-dark btn-custom-block btn-block"
+              (click)="addSkillGroup()"
+            >Добавить блок</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-12 d-flex justify-content-end">
         <button
           type="submit"
-          class="btn btn-dark btn-custom-block"
+          class="btn btn-success btn-custom-block"
           [disabled]="editUserForm.invalid || submitted"
-        >Отправить
+        >Сохранить
         </button>
       </div>
     </div>

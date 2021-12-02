@@ -1,4 +1,4 @@
-<div class="container pt-3">
+<div class="container pt-3 pb-5">
   <h4 class="mb-5 text-center text-sm-left">Создание пользователя</h4>
   <form action="" class="w-100" [formGroup]="createUserForm" (ngSubmit)="submit()">
     <div class="row">
@@ -135,20 +135,9 @@
     </div>
 
     <div class="row" formArrayName="skills">
-      <div class="col col-12">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button
-            (click)="addSkillGroup()"
-            class="btn btn-success btn-sm"
-          ><i class="bi bi-plus-square"></i></button>
-          <button
-            (click)="removeSkillGroup()"
-            class="btn btn-danger btn-sm"
-          ><i class="bi bi-dash-square"></i></button>
-        </div>
-      </div>
-      <div class="col col-12">
-        <div class="row" *ngFor="let control of skillsControls.controls; let i = index" [formGroupName]="i">
+      <div class="col col-12 col-md-6">
+        <div class="row skills-block mb-3" *ngFor="let control of skillsControls.controls; let i = index" [formGroupName]="i">
+          <div class="skills-remove" (click)="removeSkillsGroup(i)"><i class="bi bi-x-circle-fill"></i></div>
           <div class="col col-12">
             <div class="form-group">
               <label for="input-email">Место учебы</label>
@@ -157,34 +146,42 @@
               </div>
             </div>
           </div>
-          <div class="col col-6">
+          <div class="col col-12 col-sm-6">
             <div class="form-group">
               <label for="input-email">Дата начала</label>
               <div class="input-group">
-                <input id="input-startAge" class="form-control" type="text" formControlName="startAge">
+                <input id="input-startAge" class="form-control" type="date" formControlName="startAge">
               </div>
             </div>
           </div>
-          <div class="col col-6">
+          <div class="col col-12 col-sm-6">
             <div class="form-group">
               <label for="input-email">Дата завершения</label>
               <div class="input-group">
-                <input id="input-endAge" class="form-control" type="text" formControlName="endAge">
+                <input id="input-endAge" class="form-control" type="date" formControlName="endAge">
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button
+              class="btn btn-dark btn-custom-block btn-block"
+              (click)="addSkillGroup()"
+            >Добавить блок Обучение</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col col-12">
+    <div class="row mt-3">
+      <div class="col col-12 d-flex justify-content-end">
         <button
           type="submit"
-          class="btn btn-dark btn-custom-block"
+          class="btn btn-success btn-custom-block"
           [disabled]="createUserForm.invalid || submitted"
-        >Отправить
-        </button>
+        >Сохранить</button>
       </div>
     </div>
   </form>
