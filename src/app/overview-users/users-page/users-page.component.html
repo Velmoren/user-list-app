@@ -62,8 +62,8 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Attention!</h4>
-    <span>
-      <span aria-hidden="true">&times;</span>
+    <span class="confirm-modal__close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"><i class="bi bi-x-lg"></i></span>
     </span>
   </div>
   <div class="modal-body">
