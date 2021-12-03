@@ -1,0 +1,66 @@
+{
+  "HEADER": {
+    "TITLE": "User List",
+    "USERS": "Users",
+    "CREATE": "Create",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout"
+  },
+  "USERS-TABLE": {
+    "STATUS": "Status",
+    "AVATAR": "Avatar",
+    "USER": "User",
+    "EMAIL": "E-mail",
+    "ROLE": "Role",
+    "TEXTS": {
+      "TITLE": "Users",
+      "SEARCH": "Search",
+      "ONLINE": "Online",
+      "OFFLINE": "Offline"
+    }
+  },
+  "USER": {
+    "TITLE": "Details",
+    "EDUCATION": "Education",
+    "EMAIL": "E-mail",
+    "ROLE": "Role"
+  },
+  "CREATE": {
+    "TITLE": "Create User",
+    "FORM": {
+      "NAME": "Name",
+      "EMAIL": "E-mail",
+      "PASSWORD": "Password",
+      "CONFIRM-PASSWORD": "Confirm password",
+      "ROLE": "Role",
+      "CHANGE-ROLE": "Change Role",
+      "AVATAR": "Avatar",
+      "EDUCATION": {
+        "NAME": "Name of the institution",
+        "START-AT": "Start Date",
+        "END-AT": "End Date",
+        "ADD-BUTTON": "Add Education"
+      },
+      "SAVE-BUTTON": "Create"
+    }
+  },
+  "UPDATE": {
+    "TITLE": "Update User",
+    "FORM": {
+      "NAME": "Name",
+      "EMAIL": "E-mail",
+      "PASSWORD": "Password",
+      "CONFIRM-PASSWORD": "Confirm password",
+      "ROLE": "Role",
+      "CHANGE-ROLE": "Change Role",
+      "AVATAR": "Avatar",
+      "EDUCATION": {
+        "NAME": "Name of the institution",
+        "START-AT": "Start Date",
+        "END-AT": "End Date",
+        "ADD-BUTTON": "Add Education"
+      },
+      "SAVE-BUTTON": "Update"
+    }
+  }
+}

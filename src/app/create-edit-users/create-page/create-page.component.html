@@ -1,11 +1,11 @@
 <div class="container pt-3 pb-5">
-  <h4 class="mb-5 text-center text-sm-left">Создание пользователя</h4>
+  <h4 class="mb-5 text-center text-sm-left">{{ 'CREATE.TITLE' | translate }}</h4>
   <form action="" class="w-100" [formGroup]="createUserForm" (ngSubmit)="submit()">
     <div class="row">
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-name">Имя</label>
+          <label for="input-name">{{ 'CREATE.FORM.NAME' | translate }}</label>
           <div class="input-group">
             <input
               id="input-name"
@@ -24,7 +24,7 @@
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-email">Email</label>
+          <label for="input-email">{{ 'CREATE.FORM.EMAIL' | translate }}</label>
           <div class="input-group">
             <input
               id="input-email"
@@ -49,7 +49,7 @@
     <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-password">Пароль</label>
+          <label for="input-password">{{ 'CREATE.FORM.PASSWORD' | translate }}</label>
           <div class="input-group">
             <input
               id="input-password"
@@ -66,10 +66,6 @@
               Поле password не может быть пустым
             </small>
 
-            <small class="form-error-text" *ngIf="password?.errors?.['required']">
-              Passwords do not match
-            </small>
-
             <small class="form-error-text" *ngIf="password?.errors?.['minlength']">
               Длина вашего пароля {{password?.errors?.['minlength']['actualLength']}}. Пароль должен быть
               минимум {{password?.errors?.['minlength']['requiredLength']}} символов!
@@ -80,7 +76,7 @@
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-confirm-password">Повторите пароль</label>
+          <label for="input-confirm-password">{{ 'CREATE.FORM.CONFIRM-PASSWORD' | translate }}</label>
           <div class="input-group">
             <input
               id="input-confirm-password"
@@ -104,9 +100,9 @@
     <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="inputState">Роль</label>
+          <label for="inputState">{{ 'CREATE.FORM.ROLE' | translate }}</label>
           <select id="inputState" class="form-control" formControlName="permission">
-            <option selected value="">Выбрать роль</option>
+            <option selected value="">{{ 'CREATE.FORM.CHANGE-ROLE' | translate }}</option>
             <option value="admin">admin</option>
             <option value="user">user</option>
           </select>
@@ -120,7 +116,7 @@
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="inputState">Аватар пользователя</label>
+          <label for="inputState">{{ 'CREATE.FORM.AVATAR' | translate }}</label>
           <div class="custom-file mb-3">
             <input
               type="file"
@@ -140,7 +136,7 @@
           <div class="skills-remove" (click)="removeSkillsGroup(i)"><i class="bi bi-x-circle-fill"></i></div>
           <div class="col col-12">
             <div class="form-group">
-              <label for="input-email">Место учебы</label>
+              <label for="input-email">{{ 'CREATE.FORM.EDUCATION.NAME' | translate }}</label>
               <div class="input-group">
                 <input id="input-skill" class="form-control" type="text" formControlName="name">
               </div>
@@ -148,17 +144,25 @@
           </div>
           <div class="col col-12 col-sm-6">
             <div class="form-group">
-              <label for="input-email">Дата начала</label>
+              <label for="input-email">{{ 'CREATE.FORM.EDUCATION.START-AT' | translate }}</label>
               <div class="input-group">
-                <input id="input-startAge" class="form-control" type="date" formControlName="startAge">
+                <input id="input-startAt" class="form-control" type="date" formControlName="startAt">
               </div>
             </div>
           </div>
           <div class="col col-12 col-sm-6">
             <div class="form-group">
-              <label for="input-email">Дата завершения</label>
+              <label for="input-email">{{ 'CREATE.FORM.EDUCATION.END-AT' | translate }}</label>
               <div class="input-group">
-                <input id="input-endAge" class="form-control" type="date" formControlName="endAge">
+                <input id="input-endAge" class="form-control" type="date" formControlName="endAt">
+              </div>
+              <div
+                *ngIf="createUserForm.hasError('notSameDate') && (endAt?.touched || endAt?.dirty)"
+                class="validation"
+              >
+                <small class="form-error-text">
+                  Дата окончания обучения должна быть позднее даты начала!
+                </small>
               </div>
             </div>
           </div>
@@ -169,7 +173,7 @@
             <button
               class="btn btn-dark btn-custom-block btn-block"
               (click)="addSkillGroup()"
-            >Добавить блок Обучение</button>
+            >{{ 'CREATE.FORM.EDUCATION.ADD-BUTTON' | translate }}</button>
           </div>
         </div>
       </div>
@@ -181,7 +185,7 @@
           type="submit"
           class="btn btn-success btn-custom-block"
           [disabled]="createUserForm.invalid || submitted"
-        >Сохранить</button>
+        >{{ 'CREATE.FORM.SAVE-BUTTON' | translate }}</button>
       </div>
     </div>
   </form>

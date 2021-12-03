@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../../services/users.service";
+import {User, UsersService} from "../../services/users.service";
 import {LoadingService} from "../../services/loading.service";
 import {AuthService} from "../../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-users-page',
@@ -14,6 +16,8 @@ export class UsersPageComponent implements OnInit {
 
   users: any = []
   isOnline = true
+  searchStr: string = ''
+  userByDelete?: User
 
   constructor(
     public auth: AuthService,
@@ -21,7 +25,9 @@ export class UsersPageComponent implements OnInit {
     private loading: LoadingService,
     private toastr: ToastrService,
     private router: Router,
-  ) { }
+    public translate: TranslateService,
+    private modalService: NgbModal,
+  ) {}
 
   ngOnInit(): void {
     this.getUsers()
@@ -36,21 +42,38 @@ export class UsersPageComponent implements OnInit {
     })
   }
 
+  renderUsersFromSearch() {
+    return this.searchStr ?
+      this.users.filter((user: User) => user.name.includes(this.searchStr) || user.email.includes(this.searchStr)) :
+      this.users
+  }
+
   deleteUser(user: any) {
     if(!user.superAdmin) {
-      if (confirm(`Вы точно хотите удалить пользователя ${user.name}?`)) {
-        Promise.resolve().then(() => this.loading.enableLoading())
+      Promise.resolve().then(() => this.loading.enableLoading())
 
-        this.userService.deleteUser(user.id).subscribe(res => {
-          this.getUsers()
+      this.userService.deleteUser(user.id).subscribe(() => {
+        this.getUsers()
 
-          Promise.resolve().then(() => this.loading.disableLoading())
+        Promise.resolve().then(() => this.loading.disableLoading())
 
-          this.toastr.success('User deleted!', 'Success!');
-        })
-      }
+        this.toastr.success('User deleted!', 'Success!');
+      })
     } else {
       alert('Данного пользователя удалить нельзя!')
     }
+  }
+
+  inputSearch(event: any) {
+    this.searchStr = event.target.value
+  }
+
+  modalOpen(content: any, user: any) {
+    this.userByDelete = user
+    this.modalService.open(content)
+  }
+
+  modalSave() {
+    this.deleteUser(this.userByDelete)
   }
 }

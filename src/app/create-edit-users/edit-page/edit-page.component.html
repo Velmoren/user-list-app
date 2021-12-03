@@ -1,11 +1,11 @@
 <div class="container pt-3">
-  <h4 class="mb-5 text-center text-sm-left">Редактирование пользователя</h4>
+  <h4 class="mb-5 text-center text-sm-left">{{ 'UPDATE.TITLE' | translate }}</h4>
 
   <form action="" class="w-100" [formGroup]="editUserForm" (ngSubmit)="submit()">
     <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-name">Имя</label>
+          <label for="input-name">{{ 'UPDATE.FORM.NAME' | translate }}</label>
           <div class="input-group">
             <input
               id="input-name"
@@ -14,17 +14,17 @@
               formControlName="name"
             >
           </div>
-          <!--          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">-->
-          <!--            <small class="form-error-text" *ngIf="name?.errors?.['required']">-->
-          <!--              Поле имя не может быть пустым-->
-          <!--            </small>-->
-          <!--          </div>-->
+          <div *ngIf="name?.invalid && (name?.touched || name?.dirty)">
+            <small class="form-error-text" *ngIf="name?.errors?.['required']">
+              Поле имя не может быть пустым
+            </small>
+          </div>
         </div>
       </div>
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-email">Email</label>
+          <label for="input-email">{{ 'UPDATE.FORM.EMAIL' | translate }}</label>
           <div class="input-group">
             <input
               id="input-email"
@@ -33,15 +33,15 @@
               formControlName="email"
             >
           </div>
-          <!--          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">-->
-          <!--            <small class="form-error-text" *ngIf="email?.errors?.['required']">-->
-          <!--              Поле email не может быть пустым-->
-          <!--            </small>-->
+          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+            <small class="form-error-text" *ngIf="email?.errors?.['required']">
+              Поле email не может быть пустым
+            </small>
 
-          <!--            <small class="form-error-text" *ngIf="email?.errors?.['email']">-->
-          <!--              Введите корректный email-->
-          <!--            </small>-->
-          <!--          </div>-->
+            <small class="form-error-text" *ngIf="email?.errors?.['email']">
+              Введите корректный email
+            </small>
+          </div>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-password">Пароль</label>
+          <label for="input-password">{{ 'UPDATE.FORM.PASSWORD' | translate }}</label>
           <div class="input-group">
             <input
               id="input-password"
@@ -58,12 +58,25 @@
               formControlName="password"
             >
           </div>
+          <div
+            *ngIf="password?.invalid && (password?.touched || password?.dirty)"
+            class="validation"
+          >
+            <small class="form-error-text" *ngIf="password?.errors?.['required']">
+              Поле password не может быть пустым
+            </small>
+
+            <small class="form-error-text" *ngIf="password?.errors?.['minlength']">
+              Длина вашего пароля {{password?.errors?.['minlength']['actualLength']}}. Пароль должен быть
+              минимум {{password?.errors?.['minlength']['requiredLength']}} символов!
+            </small>
+          </div>
         </div>
       </div>
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="input-confirm-password">Повторите пароль</label>
+          <label for="input-confirm-password">{{ 'UPDATE.FORM.CONFIRM-PASSWORD' | translate }}</label>
           <div class="input-group">
             <input
               id="input-confirm-password"
@@ -72,6 +85,14 @@
               formControlName="confirmPassword"
             >
           </div>
+          <div
+            *ngIf="editUserForm.hasError('notSame') && (confirmPassword?.touched || confirmPassword?.dirty)"
+            class="validation"
+          >
+            <small class="form-error-text">
+              Пароли не совпадают
+            </small>
+          </div>
         </div>
       </div>
     </div>
@@ -79,23 +100,23 @@
     <div class="row">
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="inputState">Роль</label>
+          <label for="inputState">{{ 'UPDATE.FORM.ROLE' | translate }}</label>
           <select id="inputState" class="form-control" formControlName="permission">
-            <option selected value="">Выбрать роль</option>
+            <option selected value="">{{ 'UPDATE.FORM.CHANGE-ROLE' | translate }}</option>
             <option value="admin">admin</option>
             <option value="user">user</option>
           </select>
-          <!--          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">-->
-          <!--            <small class="form-error-text" *ngIf="permission?.errors?.['required']">-->
-          <!--              Поле Роль - обязательное-->
-          <!--            </small>-->
-          <!--          </div>-->
+          <div *ngIf="permission?.invalid && (permission?.touched || permission?.dirty)">
+            <small class="form-error-text" *ngIf="permission?.errors?.['required']">
+              Поле Роль - обязательное
+            </small>
+          </div>
         </div>
       </div>
 
       <div class="col col-12 col-md-6">
         <div class="form-group">
-          <label for="inputState">Аватар пользователя</label>
+          <label for="inputState">{{ 'UPDATE.FORM.AVATAR' | translate }}</label>
           <div class="custom-file mb-3">
             <input
               type="file"
@@ -109,13 +130,13 @@
       </div>
     </div>
 
-    <div class="row" formArrayName="skills">
+    <div class="row" formArrayName="skills" *ngIf="skillsControls.controls">
       <div class="col col-12 col-md-6">
         <div class="row skills-block mb-3" *ngFor="let control of skillsControls.controls; let i = index" [formGroupName]="i">
           <div class="skills-remove" (click)="removeSkillsGroup(i)"><i class="bi bi-x-circle-fill"></i></div>
           <div class="col col-12">
             <div class="form-group">
-              <label for="input-email">Место учебы</label>
+              <label for="input-email">{{ 'UPDATE.FORM.EDUCATION.NAME' | translate }}</label>
               <div class="input-group">
                 <input id="input-skill" class="form-control" type="text" formControlName="name">
               </div>
@@ -123,17 +144,17 @@
           </div>
           <div class="col col-12 col-sm-6">
             <div class="form-group">
-              <label for="input-email">Дата начала</label>
+              <label for="input-email">{{ 'UPDATE.FORM.EDUCATION.START-AT' | translate }}</label>
               <div class="input-group">
-                <input id="input-startAge" class="form-control" type="date" formControlName="startAge">
+                <input id="input-startAt" class="form-control" type="date" formControlName="startAt">
               </div>
             </div>
           </div>
           <div class="col col-12 col-sm-6">
             <div class="form-group">
-              <label for="input-email">Дата завершения</label>
+              <label for="input-email">{{ 'UPDATE.FORM.EDUCATION.END-AT' | translate }}</label>
               <div class="input-group">
-                <input id="input-endAge" class="form-control" type="date" formControlName="endAge">
+                <input id="input-endAge" class="form-control" type="date" formControlName="endAt">
               </div>
             </div>
           </div>
@@ -144,7 +165,7 @@
             <button
               class="btn btn-dark btn-custom-block btn-block"
               (click)="addSkillGroup()"
-            >Добавить блок</button>
+            >{{ 'UPDATE.FORM.EDUCATION.ADD-BUTTON' | translate }}</button>
           </div>
         </div>
       </div>
@@ -156,7 +177,7 @@
           type="submit"
           class="btn btn-success btn-custom-block"
           [disabled]="editUserForm.invalid || submitted"
-        >Сохранить
+        >{{ 'UPDATE.FORM.SAVE-BUTTON' | translate }}
         </button>
       </div>
     </div>

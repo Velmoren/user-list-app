@@ -1,0 +1,66 @@
+{
+  "HEADER": {
+    "TITLE": "Liste d'utilisateur",
+    "USERS": "Utilisatrices",
+    "CREATE": "Créer",
+    "LOGIN": "connexion",
+    "LOGOUT": "Se déconnecter"
+  },
+  "USERS-TABLE": {
+    "STATUS": "Statut",
+    "AVATAR": "Avatar",
+    "USER": "Utilisateur",
+    "EMAIL": "E-mail",
+    "ROLE": "Rôle",
+    "TEXTS": {
+      "TITLE": "Utilisatrices",
+      "SEARCH": "Chercher",
+      "ONLINE": "En ligne",
+      "OFFLINE": "Hors ligne"
+    }
+  },
+  "USER": {
+    "TITLE": "Des détails",
+    "EDUCATION": "Éducation",
+    "EMAIL": "E-mail",
+    "ROLE": "Rôle"
+  },
+  "CREATE": {
+    "TITLE": "Créer un Utilisateur",
+    "FORM": {
+      "NAME": "Nom",
+      "EMAIL": "E-mail",
+      "PASSWORD": "Mot de passe",
+      "CONFIRM-PASSWORD": "Confirmez le mot de passe",
+      "ROLE": "Rôle",
+      "CHANGE-ROLE": "Changer de rôle",
+      "AVATAR": "Avatar",
+      "EDUCATION": {
+        "NAME": "Nom de l'établissement",
+        "START-AT": "Date de début",
+        "END-AT": "Date de fin",
+        "ADD-BUTTON": "Ajouter une formation"
+      },
+      "SAVE-BUTTON": "Créer"
+    }
+  },
+  "UPDATE": {
+    "TITLE": "Mettre à jour l'utilisateur",
+    "FORM": {
+      "NAME": "Nom",
+      "EMAIL": "E-mail",
+      "PASSWORD": "Mot de passe",
+      "CONFIRM-PASSWORD": "Confirmez le mot de passe",
+      "ROLE": "Rôle",
+      "CHANGE-ROLE": "Changer de rôle",
+      "AVATAR": "Avatar",
+      "EDUCATION": {
+        "NAME": "Nom de l'établissement",
+        "START-AT": "Date de début",
+        "END-AT": "Date de fin",
+        "ADD-BUTTON": "Ajouter une formation"
+      },
+      "SAVE-BUTTON": "Mettre à jour"
+    }
+  }
+}

@@ -1,18 +1,30 @@
 <div class="table-responsive">
+  <div class="container-fluid users-head">
+    <div class="row p-1">
+      <div class="col col-12 col-sm-6 col-md-8 mb-3 mb-sm-0">
+        <h4 class="m-0 text-center text-sm-left">{{ 'USERS-TABLE.TEXTS.TITLE' | translate }}</h4>
+      </div>
+      <div class="col col-12 col-sm-6 col-md-4">
+        <div class="form-group mb-3 mb-sm-0">
+          <input class="form-control" type="text" placeholder="{{ 'USERS-TABLE.TEXTS.SEARCH' | translate }}" (input)="inputSearch($event)">
+        </div>
+      </div>
+    </div>
+  </div>
   <table class="table table-striped users-table">
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Status</th>
-      <th scope="col">Avatar</th>
-      <th scope="col">User</th>
-      <th scope="col">Email</th>
-      <th scope="col">Role</th>
+      <th scope="col">{{ 'USERS-TABLE.STATUS' | translate }}</th>
+      <th scope="col">{{ 'USERS-TABLE.AVATAR' | translate }}</th>
+      <th scope="col">{{ 'USERS-TABLE.USER' | translate }}</th>
+      <th scope="col">{{ 'USERS-TABLE.EMAIL' | translate }}</th>
+      <th scope="col">{{ 'USERS-TABLE.ROLE' | translate }}</th>
       <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users; index as idx">
+    <tr *ngFor="let user of renderUsersFromSearch(); index as idx">
       <th scope="row">{{ idx + 1 }}</th>
       <th scope="row" [appIsOnline]="user['isOnline']">{{ user['isOnline'] ? 'Online' : 'Offline' }}</th>
       <th>
@@ -38,7 +50,7 @@
             *ngIf="auth.isAdmin()"
             type="button"
             class="btn btn-danger btn-sm"
-            (click)="deleteUser(user)"
+            (click)="modalOpen(content, user)"
           ><i class="bi bi-trash-fill"></i></a>
         </div>
       </td>
@@ -46,3 +58,18 @@
     </tbody>
   </table>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Attention!</h4>
+    <span>
+      <span aria-hidden="true">&times;</span>
+    </span>
+  </div>
+  <div class="modal-body">
+    <span>Are you sure you want to delete the user?</span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); modalSave()">Delete</button>
+  </div>
+</ng-template>

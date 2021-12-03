@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Skill, User, UsersService} from "../../services/users.service";
 import {LoadingService} from "../../services/loading.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {first, switchMap} from "rxjs";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {first} from "rxjs";
 import {checkPasswords} from "../../helpers/checkPasswords.validator";
 import {ToastrService} from "ngx-toastr";
 import {checkDates} from "../../helpers/checkDates.validator";
@@ -21,6 +21,7 @@ export class EditPageComponent implements OnInit {
   userAvatarFile: any
   imagePath: any
   editUserId?: number
+  userIsOnline: boolean = false
 
   user: any = {
     id: '',
@@ -35,8 +36,7 @@ export class EditPageComponent implements OnInit {
     private loading: LoadingService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private router: Router,
-    private fb: FormBuilder
+    private router: Router
   ) {
   }
 
@@ -44,12 +44,12 @@ export class EditPageComponent implements OnInit {
     this.userId = this.route.snapshot.params['id']
 
     this.editUserForm = new FormGroup({
-      name: new FormControl(this.user.name, Validators.required),
-      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
-      permission: new FormControl(this.user.permission, Validators.required),
-      avatar: new FormControl(this.user.avatar),
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      permission: new FormControl('', Validators.required),
+      avatar: new FormControl(''),
       skills: new FormArray([]),
-      password: new FormControl(this.user.password, [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('')
     }, { validators: checkPasswords })
 
@@ -60,14 +60,15 @@ export class EditPageComponent implements OnInit {
         this.userAvatarFile = user.avatar.name
         this.imagePath = user.avatar.link
         this.editUserId = user.id
+        this.userIsOnline = user.isOnline
 
         this.skillsControls.removeAt(0)
 
-        user.skills.forEach((skill: Skill) => {
+        user.skills?.forEach((skill: Skill) => {
           const control = new FormGroup({
             name: new FormControl(skill.name),
-            startAge: new FormControl(skill.startAge),
-            endAge: new FormControl(skill.endAge)
+            startAt: new FormControl(skill.startAt),
+            endAt: new FormControl(skill.endAt)
           })
 
           this.skillsControls.push(control)
@@ -120,7 +121,7 @@ export class EditPageComponent implements OnInit {
       email: this.editUserForm.value.email,
       password: this.editUserForm.value.password,
       permission: this.editUserForm.value.permission,
-      isOnline: false,
+      isOnline: this.userIsOnline,
       avatar: {
         link: this.imagePath,
         name: this.userAvatarFile
@@ -177,8 +178,8 @@ export class EditPageComponent implements OnInit {
     if (this.skillsControls.controls.length < 3) {
       const control = new FormGroup({
         name: new FormControl(''),
-        startAge: new FormControl(''),
-        endAge: new FormControl('')
+        startAt: new FormControl(''),
+        endAt: new FormControl('')
       },{
         validators: checkDates
       })

@@ -6,6 +6,7 @@ import {checkPasswords} from "../../helpers/checkPasswords.validator";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {checkDates} from "../../helpers/checkDates.validator";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-create-page',
@@ -25,7 +26,8 @@ export class CreatePageComponent implements OnInit {
     private loading: LoadingService,
     private toastr: ToastrService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public translate: TranslateService
   ) {
   }
 
@@ -73,6 +75,10 @@ export class CreatePageComponent implements OnInit {
 
   get confirmPassword() {
     return this.createUserForm.get('confirmPassword');
+  }
+
+  get endAt() {
+    return this.createUserForm.get('endAt');
   }
 
   get skills() {
@@ -153,8 +159,8 @@ export class CreatePageComponent implements OnInit {
     if (this.skillsControls.controls.length < 3) {
       const control = new FormGroup({
         name: new FormControl(''),
-        startAge: new FormControl(''),
-        endAge: new FormControl('')
+        startAt: new FormControl(''),
+        endAt: new FormControl('')
       },{
         validators: checkDates
       })
