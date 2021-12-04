@@ -1,63 +1,64 @@
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-  <a class="navbar-brand"  [routerLink]="['/users']">{{ 'HEADER.TITLE' | translate }}</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    (click)="collapse.toggle(isCollapsed)"
-    [attr.aria-expanded]="!isCollapsed"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="wrapper-app">
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <a class="navbar-brand"  [routerLink]="['/users']">{{ 'HEADER.TITLE' | translate }}</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="collapse.toggle(isCollapsed)"
+      [attr.aria-expanded]="!isCollapsed"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" *ngIf="auth.isAuthenticated();">
-        <a class="nav-link" [routerLink]="['/users']">{{ 'HEADER.USERS' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="auth.isAuthenticated() && auth.isAdmin()">
-        <a class="nav-link" [routerLink]="['/user/create']">{{ 'HEADER.CREATE' | translate }}</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav my-2 my-lg-0">
-      <li class="nav-item dropdown">
-        <label class="m-0">
-          <select class="custom-select select-lang m-0" #langselect (change)="translate.use(langselect.value)">
-            <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}.</option>
-          </select>
-        </label>
-      </li>
-
-      <li class="nav-item" *ngIf="auth.isAuthenticated(); else login">
-        <a class="nav-link" href="#" (click)="logout($event)">{{ 'HEADER.LOGOUT' | translate }}</a>
-      </li>
-
-      <ng-template #login>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/login']">{{ 'HEADER.LOGIN' | translate }}</a>
+    <div class="collapse navbar-collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active" *ngIf="auth.isAuthenticated();">
+          <a class="nav-link" [routerLink]="['/users']">{{ 'HEADER.USERS' | translate }}</a>
         </li>
-      </ng-template>
+        <li class="nav-item" routerLinkActive="active" *ngIf="auth.isAuthenticated() && auth.isAdmin()">
+          <a class="nav-link" [routerLink]="['/user/create']">{{ 'HEADER.CREATE' | translate }}</a>
+        </li>
+      </ul>
 
-    </ul>
-  </div>
-</nav>
+      <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item dropdown">
+          <label class="m-0">
+            <select class="custom-select select-lang m-0" #langselect (change)="translate.use(langselect.value)">
+              <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}.</option>
+            </select>
+          </label>
+        </li>
 
-<main class="main-content">
-  <router-outlet></router-outlet>
+        <li class="nav-item" *ngIf="auth.isAuthenticated(); else login">
+          <a class="nav-link" href="#" (click)="logout($event)">{{ 'HEADER.LOGOUT' | translate }}</a>
+        </li>
 
-  <div class="overlay" [class.show]="loading.statusLoading() | async">
-    <div class="spinner-border text-dark" role="status"></div>
-  </div>
-</main>
+        <ng-template #login>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/login']">{{ 'HEADER.LOGIN' | translate }}</a>
+          </li>
+        </ng-template>
 
-<footer class="footer">
-  <div class="container-fluid">
-    <p class="text-center">
-      @Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    </p>
-  </div>
-</footer>
+      </ul>
+    </div>
+  </nav>
 
+  <main class="main-content">
+    <router-outlet></router-outlet>
+
+    <div class="overlay" [class.show]="loading.statusLoading() | async">
+      <div class="spinner-border text-dark" role="status"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <p class="text-center">
+        @Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      </p>
+    </div>
+  </footer>
+</div>
 
 
 
