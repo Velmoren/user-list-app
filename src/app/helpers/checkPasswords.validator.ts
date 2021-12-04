@@ -1,4 +1,4 @@
-import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 const checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
   let pass = group.get('password')?.value;

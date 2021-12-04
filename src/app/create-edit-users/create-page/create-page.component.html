@@ -154,16 +154,15 @@
             <div class="form-group">
               <label for="input-email">{{ 'CREATE.FORM.EDUCATION.END-AT' | translate }}</label>
               <div class="input-group">
-                <input id="input-endAge" class="form-control" type="date" formControlName="endAt">
+                <input id="input-endAge" class="form-control" type="date" formControlName="endAt" (input)="logger(control)">
               </div>
-              <div
-                *ngIf="createUserForm.hasError('notSameDate') && (endAt?.touched || endAt?.dirty)"
-                class="validation"
-              >
-                <small class="form-error-text">
-                  Дата окончания обучения должна быть позднее даты начала!
-                </small>
-              </div>
+            </div>
+          </div>
+          <div class="col col-12" *ngIf="control.hasError('notSameDate') && (control.get('endAt')?.touched || control.get('endAt')?.dirty)">
+            <div class="validation">
+              <small class="form-error-text">
+                Дата окончания обучения должна быть позднее даты начала!
+              </small>
             </div>
           </div>
         </div>
@@ -172,19 +171,20 @@
           <div class="col">
             <button
               class="btn btn-dark btn-custom-block btn-block"
+              type="button"
               (click)="addSkillGroup()"
             >{{ 'CREATE.FORM.EDUCATION.ADD-BUTTON' | translate }}</button>
           </div>
         </div>
       </div>
     </div>
-
+<!--    [disabled]="createUserForm.invalid || submitted"-->
     <div class="row mt-3">
       <div class="col col-12 d-flex justify-content-end">
         <button
           type="submit"
           class="btn btn-success btn-custom-block"
-          [disabled]="createUserForm.invalid || submitted"
+
         >{{ 'CREATE.FORM.SAVE-BUTTON' | translate }}</button>
       </div>
     </div>

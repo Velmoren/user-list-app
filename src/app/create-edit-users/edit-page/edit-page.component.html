@@ -158,12 +158,21 @@
               </div>
             </div>
           </div>
+
+          <div class="col col-12" *ngIf="control.hasError('notSameDate') && (control.get('endAt')?.touched || control.get('endAt')?.dirty)">
+            <div class="validation">
+              <small class="form-error-text">
+                Дата окончания обучения должна быть позднее даты начала!
+              </small>
+            </div>
+          </div>
         </div>
 
         <div class="row">
           <div class="col">
             <button
               class="btn btn-dark btn-custom-block btn-block"
+              type="button"
               (click)="addSkillGroup()"
             >{{ 'UPDATE.FORM.EDUCATION.ADD-BUTTON' | translate }}</button>
           </div>

@@ -170,4 +170,8 @@ export class CreatePageComponent implements OnInit {
       alert('Добавлено максимум полей')
     }
   }
+
+  logger(control: any) {
+    console.log(control.hasError('notSameDate'))
+  }
 }

@@ -22,7 +22,7 @@
     <ul class="navbar-nav my-2 my-lg-0">
       <li class="nav-item dropdown">
         <label class="m-0">
-          <select class="custom-select m-0" #langselect (change)="translate.use(langselect.value)">
+          <select class="custom-select select-lang m-0" #langselect (change)="translate.use(langselect.value)">
             <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}.</option>
           </select>
         </label>

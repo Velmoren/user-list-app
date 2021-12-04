@@ -62,13 +62,15 @@ export class EditPageComponent implements OnInit {
         this.editUserId = user.id
         this.userIsOnline = user.isOnline
 
-        this.skillsControls.removeAt(0)
+        this.skillsControls.reset()
 
         user.skills?.forEach((skill: Skill) => {
           const control = new FormGroup({
             name: new FormControl(skill.name),
             startAt: new FormControl(skill.startAt),
             endAt: new FormControl(skill.endAt)
+          },{
+            validators: checkDates
           })
 
           this.skillsControls.push(control)

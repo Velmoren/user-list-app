@@ -56,3 +56,17 @@
     visibility: visible;
   }
 }
+
+.select-lang {
+  background-color: #343a40;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  outline: none;
+
+  &:active, &:hover, &:focus {
+    border: none !important;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+  }
+}
