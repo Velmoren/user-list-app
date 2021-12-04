@@ -10,63 +10,7 @@
 
 @import '~ngx-toastr/toastr';
 
-.table td {
-  min-width: 120px;
-}
 
-.table td, .table th {
-  text-align: center;
-  vertical-align: middle;
-}
 
-.form {
-  &-error-text {
-    color: red;
-  }
-}
 
-.btn-custom-block {
-  @media (max-width: 768px) {
-    width: 100%;
-    display: block;
-  }
-}
 
-.main-content {
-  height: calc(100vh - 56px);
-  position: relative;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0,0,0,.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .2s;
-
-  &.show {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.select-lang {
-  background-color: #343a40;
-  color: rgba(255, 255, 255, 0.5);
-  border: none;
-  outline: none;
-
-  &:active, &:hover, &:focus {
-    border: none !important;
-    outline: none !important;
-    outline-offset: 0 !important;
-    box-shadow: none !important;
-  }
-}
