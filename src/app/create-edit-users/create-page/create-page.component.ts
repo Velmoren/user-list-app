@@ -7,6 +7,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {checkDates} from "../../helpers/checkDates.validator";
 import {TranslateService} from "@ngx-translate/core";
+import {MaxLengthValidator} from "../../helpers/maxLength.validator";
 
 @Component({
   selector: 'app-create-page',
@@ -34,7 +35,7 @@ export class CreatePageComponent implements OnInit {
   ngOnInit(): void {
     this.createUserForm = new FormGroup({
       name: new FormControl('', [
-        Validators.required
+        Validators.required, MaxLengthValidator.checkLength
       ]),
       email: new FormControl(this.userAvatarFile, [
         Validators.email,

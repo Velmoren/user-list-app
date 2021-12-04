@@ -7,6 +7,7 @@ import {first} from "rxjs";
 import {checkPasswords} from "../../helpers/checkPasswords.validator";
 import {ToastrService} from "ngx-toastr";
 import {checkDates} from "../../helpers/checkDates.validator";
+import {MaxLengthValidator} from "../../helpers/maxLength.validator";
 
 @Component({
   selector: 'app-edit-page',
@@ -44,7 +45,7 @@ export class EditPageComponent implements OnInit {
     this.userId = this.route.snapshot.params['id']
 
     this.editUserForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.required, MaxLengthValidator.checkLength]),
       email: new FormControl('', [Validators.required, Validators.email]),
       permission: new FormControl('', Validators.required),
       avatar: new FormControl(''),

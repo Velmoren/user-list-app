@@ -18,6 +18,14 @@
             <small class="form-error-text" *ngIf="name?.errors?.['required']">
               Поле имя не может быть пустым
             </small>
+
+            <small class="form-error-text" *ngIf="name?.errors?.['tooLongLength']">
+              Имя слишком длинное
+            </small>
+
+            <small class="form-error-text" *ngIf="name?.errors?.['tooShortLength']">
+              Имя слишком короткое
+            </small>
           </div>
         </div>
       </div>
